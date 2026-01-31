@@ -1,0 +1,4 @@
+// registerActionType.js
+export const KYC_UPDATE_REQUEST = "KYC_UPDATE_REQUEST";
+export const KYC_UPDATE_SUCCESS = "KYC_UPDATE_SUCCESS";
+export const KYC_UPDATE_FAILURE = "KYC_UPDATE_FAILURE";
