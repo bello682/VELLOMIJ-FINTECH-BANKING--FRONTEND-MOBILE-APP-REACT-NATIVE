@@ -1,55 +1,78 @@
-# Welcome to your Expo app 👋
+# VellomijBank 🏦
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+VellomijBank is a modern Fintech/Banking mobile application built with React Native and Expo. It features a secure interface, real-time transaction capabilities, and a robust backend integration.
 
-## Get started
+# 📱 Mobile Application (Android)
+
+You can test the live application directly on your Android device without setting up a development environment.
+
+- Download the APK:
+
+```bash
+https://expo.dev/accounts/olamijidev/projects/VellomijBank/builds/007682c8-ac0c-4e60-a2dc-7a0d52f59af0
+```
+
+- Installation Note: Since this is a custom build, your phone may flag it as an "Unknown Source." Simply select "Install Anyway" to proceed.
+
+## 🛠 Tech Stack
+
+- Frontend: React Native (Expo SDK 54), Expo Router, TypeScript.
+
+- Backend: Node.js, Express.
+
+- Database: MongoDB.
+
+- Features: New Architecture enabled, Adaptive Icons, KYC document upload (Image Picker), and Date/Time management.
+
+## ⚠️ Important Note for Testers
+
+[!IMPORTANT]
+Email Notifications: The live backend is hosted on Render. Please note that Render's free tier environment has restrictions that prevent Nodemailer from sending outbound emails (OTP/Verification).
+
+**To test the full Email/OTP flow:**
+
+1. Clone the backend repository.
+
+2. Configure your .env with a valid Gmail/SMTP service.
+
+3. Run the backend locally while connecting the mobile app to your local IP.
+
+## 🚀 Getting Started (Development)
 
 1. Install dependencies
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Configure Environment Variables
+   Create a .env file in the root directory:
 
-## Learn more
+```bash
+EXPO_PUBLIC_MOBILE_APP_BASE_URL=https://vellomij-fintech-banking-backend-api.onrender.com/Api_Url
+EXPO_PUBLIC_MOBILE_APP_ASSETS_URL=https://vellomij-fintech-banking-backend-api.onrender.com
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Start the app
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start
+```
 
-## Join the community
+- Scan the QR code with the Expo Go app (Android) or use an emulator.
 
-Join our community of developers creating universal apps.
+## 🏗 Build Instructions (EAS)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+If you wish to generate a new standalone build:
 
-<!-- npm install -g eas-cli -->
-<!-- eas login -->
-<!-- eas build:configure -->
-<!-- eas build -p android --profile preview -->
+1. Install EAS CLI: npm install -g eas-cli
+
+2. Log in: eas login
+
+3. Configure: eas build:configure
+
+4. Build APK: eas build -p android --profile preview
+
+## 📄 License
+
+This project is private and intended for portfolio demonstration.
