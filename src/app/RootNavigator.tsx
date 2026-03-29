@@ -10,26 +10,26 @@ import MainNavigator from "../navigation/MainNavigator";
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
-	// We grab the login state from your converted Redux store
-	const { user, isLoading } = useAppSelector((state) => state.loginState);
+  // We grab the login state from your converted Redux store
+  const { user, isLoading } = useAppSelector((state) => state.loginState);
 
-	// Show a splash screen while checking if the user is logged in
-	if (isLoading) {
-		// return <SplashScreen />;
-		return <LoadingOverlay visible={isLoading} message='Please wait...' />;
-	}
+  // Show a splash screen while checking if the user is logged in
+  if (isLoading) {
+    // return <SplashScreen />;
+    return <LoadingOverlay visible={isLoading} message="Please wait..." />;
+  }
 
-	return (
-		<Stack.Navigator screenOptions={{ headerShown: false }}>
-			{user?.token ? (
-				/* Main App - User is logged in */
-				<Stack.Screen name='Main' component={MainNavigator} />
-			) : (
-				/* Auth Flow - User needs to login/register */
-				<Stack.Screen name='Auth' component={AuthNavigator} />
-			)}
-		</Stack.Navigator>
-	);
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {user?.token ? (
+        /* Main App - User is logged in */
+        <Stack.Screen name="Main" component={MainNavigator} />
+      ) : (
+        /* Auth Flow - User needs to login/register */
+        <Stack.Screen name="Auth" component={AuthNavigator} />
+      )}
+    </Stack.Navigator>
+  );
 };
 
 export default RootNavigator;

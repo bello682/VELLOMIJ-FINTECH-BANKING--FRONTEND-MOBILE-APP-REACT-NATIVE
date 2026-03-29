@@ -8,67 +8,68 @@ import { useAppSelector } from "../../hooks/useTypedSelector";
 import { colors } from "../../theme/colors";
 
 const SplashScreen = () => {
-	const navigation = useNavigation<StackNavigationProp<any>>();
-	const { user } = useAppSelector((state) => state.loginState);
+  const navigation = useNavigation<StackNavigationProp<any>>();
+  const { user } = useAppSelector((state) => state.loginState);
 
-	// useEffect(() => {
-	// 	const checkUserStatus = setTimeout(async ()  => {
-	// 		// 1. Check if they've seen onboarding before
-	//         const hasSeen = await AsyncStorage.getItem("hasSeenOnboarding");
+  //   useEffect(() => {
+  //     const checkUserStatus = async () => {
+  //       // 1. Check if they've seen onboarding before
+  //       const hasSeen = await AsyncStorage.getItem("hasSeenOnboarding");
 
-	// 		if (user?.token) {
-	// 			// User is already logged in, skip the auth flow
-	// 			navigation.replace("Main");
-	// 		} else if (hasSeen) {
-	// 			navigation.replace("Login");
-	// 		} else {
+  //       // 2. Wait for the splash delay (5 seconds)
+  //       setTimeout(() => {
+  //         if (user?.token) {
+  //           // User is already logged in, skip the auth flow
+  //           navigation.replace("Main");
+  //         } else if (hasSeen === "true") {
+  //           navigation.navigate("Login"); // Go straight to login if they've seen onboarding before or they are existing user
+  //         } else {
+  //           // New user, show them the intro
+  //           navigation.navigate("Onboarding"); // First time ever
+  //         }
+  //       }, 5000);
+  //     };
 
-	// 			navigation.replace("Onboarding");
-	// 		}
-	// 	}, 2000);
+  //     checkUserStatus();
+  //   }, [user]);
+  useEffect(() => {
+    const checkUserStatus = async () => {
+      const hasSeen = await AsyncStorage.getItem("hasSeenOnboarding");
 
-	// 	return () => clearTimeout(checkUserStatus);
-	// }, [user]);
+      setTimeout(() => {
+        // If user is already logged in, RootNavigator will automatically
+        // swap Auth for Main. We don't need to call navigation.replace("Main").
 
-	useEffect(() => {
-		const checkUserStatus = async () => {
-			// 1. Check if they've seen onboarding before
-			const hasSeen = await AsyncStorage.getItem("hasSeenOnboarding");
+        if (!user?.token) {
+          if (hasSeen === "true") {
+            navigation.replace("Login");
+          } else {
+            navigation.replace("Onboarding");
+          }
+        }
+      }, 3000); // Reduced to 3s for better UX
+    };
 
-			// 2. Wait for the splash delay (2 seconds)
-			setTimeout(() => {
-				if (user?.token) {
-					// User is already logged in, skip the auth flow
-					navigation.replace("Main");
-				} else if (hasSeen === "true") {
-					navigation.navigate("Login"); // Go straight to login if they've seen onboarding before or they are existing user
-				} else {
-					// New user, show them the intro
-					navigation.navigate("Onboarding"); // First time ever
-				}
-			}, 2000);
-		};
+    checkUserStatus();
+  }, [user]);
 
-		checkUserStatus();
-	}, [user]);
-
-	return (
-		<View style={styles.container}>
-			<StatusBar barStyle='dark-content' />
-			{/* <Image source={AppImages.logo} style={styles.logo} resizeMode='contain' /> */}
-			<Logo3D size={220} />
-		</View>
-	);
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      {/* <Image source={AppImages.logo} style={styles.logo} resizeMode='contain' /> */}
+      <Logo3D size={220} />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: colors.white,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	logo: { width: 150, height: 150 },
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logo: { width: 150, height: 150 },
 });
 
 export default SplashScreen;
