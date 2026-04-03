@@ -111,107 +111,108 @@ const Stack = createStackNavigator(); // 3. Create Stack
 
 // Move your Tab Logic into a separate component
 const TabNavigator = () => {
-	const insets = useSafeAreaInsets();
-	return (
-		<Tab.Navigator
-			screenOptions={({ route }) => ({
-				headerShown: false,
-				tabBarShowLabel: true,
-				tabBarActiveTintColor: colors.primary,
-				tabBarInactiveTintColor: colors.textSecondary,
-				tabBarStyle: {
-					backgroundColor: colors.white,
-					borderTopWidth: 1,
-					borderTopColor: colors.border,
-					height: Platform.OS === "ios" ? 90 : 80,
-					paddingBottom: Platform.OS === "ios" ? insets.bottom : 15,
-					paddingTop: 10,
-				},
-				tabBarIcon: ({ focused, color }) => {
-					let iconName;
-					if (route.name === "Home")
-						iconName = focused ? "home" : "home-outline";
-					else if (route.name === "Wallet")
-						iconName = focused ? "wallet" : "wallet-outline";
-					else if (route.name === "Transfer")
-						iconName = focused ? "swap-horizontal" : "swap-horizontal-outline";
-					else if (route.name === "Savings")
-						iconName = focused ? "trending-up" : "trending-up-outline";
-					else if (route.name === "Profile")
-						iconName = focused ? "person" : "person-outline";
+  const insets = useSafeAreaInsets();
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarShowLabel: true,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textSecondary,
+        tabBarStyle: {
+          backgroundColor: colors.white,
+          borderTopWidth: 1,
+          borderTopColor: colors.border,
+          height: Platform.OS === "ios" ? 90 : 80,
+          paddingBottom: Platform.OS === "ios" ? insets.bottom : 15,
+          paddingTop: 10,
+        },
+        tabBarIcon: ({ focused, color }) => {
+          let iconName;
+          if (route.name === "Home")
+            iconName = focused ? "home" : "home-outline";
+          else if (route.name === "Wallet")
+            iconName = focused ? "wallet" : "wallet-outline";
+          else if (route.name === "Transfer")
+            iconName = focused ? "swap-horizontal" : "swap-horizontal-outline";
+          else if (route.name === "Savings")
+            iconName = focused ? "trending-up" : "trending-up-outline";
+          else if (route.name === "Profile")
+            iconName = focused ? "person" : "person-outline";
 
-					return <Ionicons name={iconName as any} size={24} color={color} />;
-				},
-			})}>
-			<Tab.Screen name='Home' component={DashboardScreen} />
-			<Tab.Screen name='Wallet' component={WalletScreen} />
-			<Tab.Screen name='Transfer' component={TransferScreen} />
-			<Tab.Screen name='Savings' component={SavingsScreen} />
-			<Tab.Screen name='Profile' component={ProfileScreen} />
-		</Tab.Navigator>
-	);
+          return <Ionicons name={iconName as any} size={24} color={color} />;
+        },
+      })}
+    >
+      <Tab.Screen name="Home" component={DashboardScreen} />
+      <Tab.Screen name="Wallet" component={WalletScreen} />
+      <Tab.Screen name="Transfer" component={TransferScreen} />
+      <Tab.Screen name="Savings" component={SavingsScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
 };
 
 // 4. Final Export: A Stack that holds the Tabs + KYC
 const MainNavigator = () => {
-	return (
-		<Stack.Navigator screenOptions={{ headerShown: false }}>
-			{/* This is your main bottom tab app , This holds your Home, Wallet, Transfer tabs*/}
-			<Stack.Screen name='MainTabs' component={TabNavigator} />
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {/* This is your main bottom tab app , This holds your Home, Wallet, Transfer tabs*/}
+      <Stack.Screen name="MainTabs" component={TabNavigator} />
 
-			{/* These are screens you can jump to from the Dashboard that don't have bottom tabs */}
-			{/* KYC Screens */}
-			<Stack.Screen name='KycIntro' component={KycIntroScreen} />
-			<Stack.Screen name='DocumentUpload' component={DocumentUpload} />
-			<Stack.Screen
-				name='FacialVerification'
-				component={FacialVerification}
-				options={{ title: "Facial Check" }}
-			/>
+      {/* These are screens you can jump to from the Dashboard that don't have bottom tabs */}
+      {/* KYC Screens */}
+      <Stack.Screen name="KycIntro" component={KycIntroScreen} />
+      <Stack.Screen name="DocumentUpload" component={DocumentUpload} />
+      <Stack.Screen
+        name="FacialVerification"
+        component={FacialVerification}
+        options={{ title: "Facial Check" }}
+      />
 
-			{/* Security & Settings */}
-			<Stack.Screen name='SetPin' component={SetPinScreen} />
-			<Stack.Screen
-				name='DeleteAccount'
-				component={DeleteAccountScreen}
-				options={{
-					headerShown: true,
-					title: "Delete Account",
-					headerStyle: { backgroundColor: "#fff" },
-					headerTintColor: colors.darkBlue,
-				}}
-			/>
+      {/* Security & Settings */}
+      <Stack.Screen name="SetPin" component={SetPinScreen} />
+      <Stack.Screen
+        name="DeleteAccount"
+        component={DeleteAccountScreen}
+        options={{
+          headerShown: true,
+          title: "Delete Account",
+          headerStyle: { backgroundColor: "#fff" },
+          headerTintColor: colors.darkBlue,
+        }}
+      />
 
-			{/* Transactions */}
-			<Stack.Screen
-				name='TransactionHistory'
-				component={TransactionHistoryScreen}
-			/>
-			<Stack.Screen
-				name='TransactionDetails'
-				component={TransactionDetailsScreen}
-			/>
-			{/* Transfer Flow Screens */}
-			<Stack.Screen name='Transfer' component={TransferScreen} />
-			<Stack.Screen name='ConfirmTransfer' component={ConfirmTransferScreen} />
-			<Stack.Screen
-				name='SuccessScreen'
-				component={SuccessScreen}
-				options={{ gestureEnabled: false }}
-			/>
+      {/* Transactions */}
+      <Stack.Screen
+        name="TransactionHistory"
+        component={TransactionHistoryScreen}
+      />
+      <Stack.Screen
+        name="TransactionDetails"
+        component={TransactionDetailsScreen}
+      />
+      {/* Transfer Flow Screens */}
+      <Stack.Screen name="Transfer" component={TransferScreen} />
+      <Stack.Screen name="ConfirmTransfer" component={ConfirmTransferScreen} />
+      <Stack.Screen
+        name="SuccessScreen"
+        component={SuccessScreen}
+        options={{ gestureEnabled: false }}
+      />
 
-			{/* Support Integration */}
-			<Stack.Screen name='HelpCenterScreen' component={HelpCenterScreen} />
-			<Stack.Screen name='ChatSupportScreen' component={ChatSupportScreen} />
+      {/* Support Integration */}
+      <Stack.Screen name="HelpCenterScreen" component={HelpCenterScreen} />
+      <Stack.Screen name="ChatSupportScreen" component={ChatSupportScreen} />
 
-			{/* Payment & Bills Flow */}
-			<Stack.Screen name='Airtime' component={AirtimeScreen} />
-			<Stack.Screen name='Bills' component={BillScreen} />
-			<Stack.Screen name='Data' component={DataScreen} />
+      {/* Payment & Bills Flow */}
+      <Stack.Screen name="Airtime" component={AirtimeScreen} />
+      <Stack.Screen name="Bills" component={BillScreen} />
+      <Stack.Screen name="Data" component={DataScreen} />
 
-			<Stack.Screen name='Notifications' component={NotificationsScreen} />
-		</Stack.Navigator>
-	);
+      <Stack.Screen name="Notifications" component={NotificationsScreen} />
+    </Stack.Navigator>
+  );
 };
 
 export default MainNavigator;

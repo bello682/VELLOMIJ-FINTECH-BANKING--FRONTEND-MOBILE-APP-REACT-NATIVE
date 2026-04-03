@@ -3,7 +3,6 @@ import React from "react";
 import { useAppSelector } from "../hooks/useTypedSelector"; // We'll create this hook next
 
 // Navigators
-import LoadingOverlay from "../components/common/AppLoader";
 import AuthNavigator from "../navigation/AuthNavigator";
 import MainNavigator from "../navigation/MainNavigator";
 
@@ -14,19 +13,20 @@ const RootNavigator = () => {
   const { user, isLoading } = useAppSelector((state) => state.loginState);
 
   // Show a splash screen while checking if the user is logged in
-  if (isLoading) {
-    // return <SplashScreen />;
-    return <LoadingOverlay visible={isLoading} message="Please wait..." />;
-  }
+  // if (isLoading) {
+  //   // return <SplashScreen />;
+  //   return <LoadingOverlay visible={isLoading} message="Please wait..." />;
+  // }
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {user?.token ? (
-        /* Main App - User is logged in */
-        <Stack.Screen name="Main" component={MainNavigator} />
-      ) : (
+      {/* If loading or no token, show Auth stack. Splash handles the delay internally. */}
+      {isLoading || !user?.token ? (
         /* Auth Flow - User needs to login/register */
         <Stack.Screen name="Auth" component={AuthNavigator} />
+      ) : (
+        /* Main App - User is logged in */
+        <Stack.Screen name="Main" component={MainNavigator} />
       )}
     </Stack.Navigator>
   );

@@ -22,3 +22,9 @@ export default App;
 
 // REACT_NATIVE_PACKAGER_HOSTNAME=192.168.0.3 npx expo start -c
 // ipconfig
+
+// # 1. Clear any stuck expo processes
+// npx expo start -c
+
+// # 2. Try the build again
+// eas build --profile preview --platform android

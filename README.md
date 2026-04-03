@@ -9,7 +9,7 @@ You can test the live application directly on your Android device without settin
 - Download the APK:
 
 ```bash
-https://expo.dev/accounts/olamijidev/projects/VellomijBank/builds/a5b15428-b21b-4e38-9f86-d8e669e9f439
+https://expo.dev/accounts/olamijidev/projects/VellomijBank/builds/bace3a9c-49d7-4d02-8ab3-4d0d65ecdafb
 ```
 
 - Installation Note: Since this is a custom build, your phone may flag it as an "Unknown Source." Simply select "Install Anyway" to proceed.
@@ -71,7 +71,7 @@ If you wish to generate a new standalone build:
 
 3. Configure: eas build:configure
 
-4. Build APK: eas build -p android --profile preview
+4. Build APK: eas build -p android --profile preview (eas build --profile preview --platform android)
 
 5. Note: This works to updated existing APK (Replace production with whatever branch name you used during your build).
 

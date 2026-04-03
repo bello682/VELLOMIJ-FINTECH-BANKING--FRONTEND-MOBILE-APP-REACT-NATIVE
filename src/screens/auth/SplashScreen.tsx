@@ -13,7 +13,7 @@ const SplashScreen = () => {
 
   //   useEffect(() => {
   //     const checkUserStatus = async () => {
-  //       // 1. Check if they've seen onboarding before
+  //       // 1. Check if they've seen Onboarding before
   //       const hasSeen = await AsyncStorage.getItem("hasSeenOnboarding");
 
   //       // 2. Wait for the splash delay (5 seconds)
@@ -22,7 +22,7 @@ const SplashScreen = () => {
   //           // User is already logged in, skip the auth flow
   //           navigation.replace("Main");
   //         } else if (hasSeen === "true") {
-  //           navigation.navigate("Login"); // Go straight to login if they've seen onboarding before or they are existing user
+  //           navigation.navigate("Login"); // Go straight to login if they've seen Onboarding before or they are existing user
   //         } else {
   //           // New user, show them the intro
   //           navigation.navigate("Onboarding"); // First time ever
@@ -34,24 +34,30 @@ const SplashScreen = () => {
   //   }, [user]);
   useEffect(() => {
     const checkUserStatus = async () => {
+      // 1. Check AsyncStorage to see if they've seen Onboarding before
       const hasSeen = await AsyncStorage.getItem("hasSeenOnboarding");
 
+      // 2. Just wait for the animation/splash delay
       setTimeout(() => {
         // If user is already logged in, RootNavigator will automatically
         // swap Auth for Main. We don't need to call navigation.replace("Main").
 
         if (!user?.token) {
+          // We are in the Auth stack.
+          // We only need to decide: Onboarding or Login?
           if (hasSeen === "true") {
             navigation.replace("Login");
           } else {
             navigation.replace("Onboarding");
           }
         }
+        // Note: If user?.token exists, RootNavigator automatically
+        // swaps the stack to "Main". We don't need to do anything!
       }, 3000); // Reduced to 3s for better UX
     };
 
     checkUserStatus();
-  }, [user]);
+  }, [user?.token]); // Only re-run if token changes
 
   return (
     <View style={styles.container}>
